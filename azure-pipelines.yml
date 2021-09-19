@@ -4,7 +4,10 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  - master
+
+variables:
+  - group: mebs-pipieline-secrets
 
 pool:
   vmImage: ubuntu-latest
@@ -15,4 +18,11 @@ steps:
       unzip terraform_1.0.7_linux_amd64.zip
       mv terraform /usr/local/bin/
       terraform -help
-    displayName: 'Install Terrform'
+    displayName: 'Install Terraform'
+  - script: |
+      export DATABASE_URL=$(heroku config:get DATABASE_URL --app mebs-infrastructure-backend)
+      terraform init -backend-config="conn_str=$DATABASE_URL"
+    displayName: Terraform Init
+    env:
+      HEROKU_API_KEY: $(HEROKU_API_KEY)
+      HEROKU_EMAIL: $(HEROKU_EMAIL)
