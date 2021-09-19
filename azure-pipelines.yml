@@ -26,3 +26,13 @@ steps:
     env:
       HEROKU_API_KEY: $(HEROKU_API_KEY)
       HEROKU_EMAIL: $(HEROKU_EMAIL)
+  - script: terraform plan -out tfplan
+    displayName: Terraform Plan
+    env:
+      HEROKU_API_KEY: $(HEROKU_API_KEY)
+      HEROKU_EMAIL: $(HEROKU_EMAIL)
+  - script: terraform apply tfplan
+    displayName: Terraform Apply
+    env:
+      HEROKU_API_KEY: $(HEROKU_API_KEY)
+      HEROKU_EMAIL: $(HEROKU_EMAIL)
