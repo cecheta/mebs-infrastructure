@@ -19,7 +19,7 @@ steps:
       mv terraform /usr/local/bin/
     displayName: 'Install Terraform'
   - script: |
-      export DATABASE_URL=$(heroku config:get DATABASE_URL --app mebs-infrastructure-backend)
+      export DATABASE_URL=$(heroku config:get DATABASE_URL --app cecheta-mebs-backend)
       terraform init -backend-config="conn_str=$DATABASE_URL"
     displayName: Terraform Init
     env:
