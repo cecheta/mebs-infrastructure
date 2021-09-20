@@ -4,6 +4,7 @@ locals {
       REACT_APP_DOMAIN = "https://cecheta-mebs.herokuapp.com"
     }
     backend = {
+      DOMAIN        = "https://cecheta-mebs.herokuapp.com"
       BCRYPT_ROUNDS = 12
     }
   }
