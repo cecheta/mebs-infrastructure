@@ -6,12 +6,12 @@ resource "heroku_app" "mebs" {
   sensitive_config_vars = merge(local.sensitive_config_vars.frontend, local.sensitive_config_vars.backend)
 }
 
-# resource "heroku_build" "example" {
-#   app        = heroku_app.mebs.name
-#   buildpacks = ["https://github.com/heroku/heroku-buildpack-nodejs#latest"]
+resource "heroku_build" "example" {
+  app        = heroku_app.mebs.name
+  buildpacks = ["https://github.com/heroku/heroku-buildpack-nodejs#latest"]
 
-#   source {
-#     url     = "https://github.com/mars/cra-example-app/archive/v2.1.1.tar.gz"
-#     version = "2.1.1"
-#   }
-# }
+  source {
+    path    = var.source_code_path
+    version = var.source_code_hash
+  }
+}

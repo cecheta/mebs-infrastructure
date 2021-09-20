@@ -15,3 +15,14 @@ variable "mongodb_url" {
   type        = string
   sensitive   = true
 }
+
+variable "source_code_path" {
+  description = "The path that contains the Mebs source code"
+  type        = string
+}
+
+variable "source_code_hash" {
+  description = "The commit hash of the version to be deployed"
+  type        = string
+  default     = null
+}

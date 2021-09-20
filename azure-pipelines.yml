@@ -43,6 +43,11 @@ steps:
     env:
       HEROKU_API_KEY: $(HEROKU_API_KEY)
       HEROKU_EMAIL: $(HEROKU_EMAIL)
+  - script: |
+      HASH=$(git rev-parse --short HEAD)
+      echo '##vso[task.setvariable variable=gitHash]$HASH'
+    displayName: Get mebs commit hash
+    workingDirectory: $(System.DefaultWorkingDirectory)/mebs
   - script: terraform plan -out tfplan
     displayName: Terraform Plan
     workingDirectory: $(System.DefaultWorkingDirectory)/mebs-infrastructure
@@ -52,6 +57,8 @@ steps:
       TF_VAR_spotify_client_id: $(SPOTIFY_CLIENT_ID)
       TF_VAR_spotify_client_secret: $(SPOTIFY_CLIENT_SECRET)
       TF_VAR_mongodb_url: $(MONGODB_URL)
+      TF_VAR_source_code_path: $(System.DefaultWorkingDirectory)/mebs
+      TF_VAR_source_code_hash: $(gitHash)
   - script: terraform apply tfplan
     displayName: Terraform Apply
     workingDirectory: $(System.DefaultWorkingDirectory)/mebs-infrastructure
@@ -61,4 +68,6 @@ steps:
       TF_VAR_spotify_client_id: $(SPOTIFY_CLIENT_ID)
       TF_VAR_spotify_client_secret: $(SPOTIFY_CLIENT_SECRET)
       TF_VAR_mongodb_url: $(MONGODB_URL)
+      TF_VAR_source_code_path: $(System.DefaultWorkingDirectory)/mebs
+      TF_VAR_source_code_hash: $(gitHash)
     condition: and(succeeded(), eq(${{ parameters.tf_apply }}, true))
