@@ -45,7 +45,8 @@ steps:
       HEROKU_EMAIL: $(HEROKU_EMAIL)
   - script: |
       HASH=$(git rev-parse --short HEAD)
-      echo '##vso[task.setvariable variable=gitHash]$HASH'
+      echo "mebs commit hash $HASH"
+      echo "##vso[task.setvariable variable=gitHash]$HASH"
     displayName: Get mebs commit hash
     workingDirectory: $(System.DefaultWorkingDirectory)/mebs
   - script: terraform plan -out tfplan

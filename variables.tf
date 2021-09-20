@@ -17,7 +17,7 @@ variable "mongodb_url" {
 }
 
 variable "source_code_path" {
-  description = "The path that contains the Mebs source code"
+  description = "The path that contains the mebs source code"
   type        = string
 }
 
