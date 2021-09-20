@@ -1,1 +1,3 @@
 provider "heroku" {}
+
+provider "random" {}
