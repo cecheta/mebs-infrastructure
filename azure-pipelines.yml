@@ -15,7 +15,8 @@ resources:
       name: cecheta/mebs
 
 steps:
-  # - checkout: mebs
+  - checkout: self
+  - checkout: mebs
   - script: curl https://cli-assets.heroku.com/install.sh | sh
     displayName: Install Heroku
   - script: |
@@ -27,11 +28,13 @@ steps:
       export DATABASE_URL=$(heroku config:get DATABASE_URL --app cecheta-mebs-backend)
       terraform init -backend-config="conn_str=$DATABASE_URL"
     displayName: Terraform Init
+    workingDirectory: $(System.DefaultWorkingDirectory)/mebs-infrastructure
     env:
       HEROKU_API_KEY: $(HEROKU_API_KEY)
       HEROKU_EMAIL: $(HEROKU_EMAIL)
   - script: terraform plan -out tfplan
     displayName: Terraform Plan
+    workingDirectory: $(System.DefaultWorkingDirectory)/mebs-infrastructure
     env:
       HEROKU_API_KEY: $(HEROKU_API_KEY)
       HEROKU_EMAIL: $(HEROKU_EMAIL)
@@ -40,6 +43,7 @@ steps:
       TF_VAR_mongodb_url: $(MONGODB_URL)
   - script: terraform apply tfplan
     displayName: Terraform Apply
+    workingDirectory: $(System.DefaultWorkingDirectory)/mebs-infrastructure
     env:
       HEROKU_API_KEY: $(HEROKU_API_KEY)
       HEROKU_EMAIL: $(HEROKU_EMAIL)
