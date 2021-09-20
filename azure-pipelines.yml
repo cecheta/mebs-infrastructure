@@ -25,8 +25,14 @@ steps:
     env:
       HEROKU_API_KEY: $(HEROKU_API_KEY)
       HEROKU_EMAIL: $(HEROKU_EMAIL)
+      TF_VAR_spotify_client_id: $(SPOTIFY_CLIENT_ID)
+      TF_VAR_spotify_client_secret: $(SPOTIFY_CLIENT_SECRET)
+      TF_VAR_mongodb_url: $(MONGODB_URL)
   - script: terraform apply tfplan
     displayName: Terraform Apply
     env:
       HEROKU_API_KEY: $(HEROKU_API_KEY)
       HEROKU_EMAIL: $(HEROKU_EMAIL)
+      TF_VAR_spotify_client_id: $(SPOTIFY_CLIENT_ID)
+      TF_VAR_spotify_client_secret: $(SPOTIFY_CLIENT_SECRET)
+      TF_VAR_mongodb_url: $(MONGODB_URL)
