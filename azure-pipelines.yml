@@ -1,5 +1,8 @@
 trigger:
-  - master
+  batch: true
+  branches:
+    include:
+      - "master"
 
 variables:
   - group: mebs-pipieline-secrets
@@ -23,6 +26,14 @@ resources:
       type: github
       endpoint: cecheta
       name: cecheta/mebs
+  pipelines:
+    - pipeline: mebs
+      source: cecheta.mebs
+      trigger:
+        branches:
+          include:
+            - "master"
+
 
 steps:
   - checkout: self
