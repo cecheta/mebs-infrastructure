@@ -34,7 +34,6 @@ resources:
           include:
             - "master"
 
-
 steps:
   - checkout: self
   - checkout: mebs

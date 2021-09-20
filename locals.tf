@@ -1,10 +1,12 @@
 locals {
+  domain = "https://cecheta-mebs.herokuapp.com"
+
   config_vars = {
     frontend = {
-      REACT_APP_DOMAIN = "https://cecheta-mebs.herokuapp.com"
+      REACT_APP_DOMAIN = local.domain
     }
     backend = {
-      DOMAIN        = "https://cecheta-mebs.herokuapp.com"
+      DOMAIN        = local.domain
       BCRYPT_ROUNDS = 12
     }
   }
