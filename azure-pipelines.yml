@@ -57,6 +57,7 @@ steps:
       HASH=$(git rev-parse --short HEAD)
       echo "mebs commit hash $HASH"
       echo "##vso[task.setvariable variable=gitHash]$HASH"
+      rm -rf $(System.DefaultWorkingDirectory)/mebs/.git
     displayName: Get mebs commit hash
     workingDirectory: $(System.DefaultWorkingDirectory)/mebs
   - script: terraform plan -out tfplan
