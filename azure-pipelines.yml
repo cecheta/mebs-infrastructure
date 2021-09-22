@@ -2,7 +2,7 @@ trigger:
   batch: true
   branches:
     include:
-      - "master"
+      - master
 
 variables:
   - group: mebs-pipieline-secrets
@@ -32,7 +32,7 @@ resources:
       trigger:
         branches:
           include:
-            - "master"
+            - master
 
 steps:
   - checkout: self
